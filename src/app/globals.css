@@ -1,0 +1,251 @@
+@import "tailwindcss";
+
+@theme {
+  --color-milk: #fffdf6;
+  --color-mint: #a8e6cf;
+  --color-mint-soft: #e0f8ee;
+  --color-mint-deep: #74d2b0;
+  --color-sun: #ffe28a;
+  --color-sun-soft: #fff5d1;
+  --color-sun-deep: #ffcf52;
+  --color-peach: #ffb69e;
+  --color-peach-soft: #ffe8df;
+  --color-peach-deep: #ff9676;
+  --color-ink: #283c46;
+  --color-ink-soft: #3f5661;
+
+  --font-display: var(--font-rubik), "Trebuchet MS", sans-serif;
+  --font-body: var(--font-onest), "Segoe UI", sans-serif;
+
+  --shadow-soft: 0 10px 28px -16px rgb(40 60 70 / 0.28);
+  --shadow-lift: 0 18px 38px -18px rgb(40 60 70 / 0.34);
+
+  --ease-gentle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 5.25rem;
+  }
+}
+
+/* Сохранённый русский язык применяется до показа, чтобы не мигал казахский текст. */
+html.locale-pending body {
+  visibility: hidden;
+}
+
+body {
+  background: var(--color-milk);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Кнопки */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  transition:
+    transform 0.25s var(--ease-gentle),
+    box-shadow 0.25s var(--ease-gentle),
+    background-color 0.2s ease;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-ink {
+  background: var(--color-ink);
+  color: var(--color-milk);
+  box-shadow: var(--shadow-soft);
+}
+.btn-mint {
+  background: var(--color-mint);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-soft);
+}
+.btn-sun {
+  background: var(--color-sun);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-soft);
+}
+.btn-milk {
+  background: var(--color-milk);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-soft);
+}
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+  }
+  .btn-mint:hover {
+    background: #98e0c5;
+  }
+  .btn-sun:hover {
+    background: #ffdb73;
+  }
+  .btn-milk:hover {
+    background: #fff;
+  }
+  .btn-ink:hover {
+    background: #1f313a;
+  }
+}
+
+/* Асимметричные скругления вместо прямоугольных блоков */
+.shape-a {
+  border-radius: 2rem 1rem 2.25rem 1.1rem;
+}
+.shape-b {
+  border-radius: 1.1rem 2.25rem 1rem 2rem;
+}
+.shape-c {
+  border-radius: 2.25rem 2.25rem 1rem 2.25rem;
+}
+.shape-d {
+  border-radius: 1rem 2rem 2.25rem 2.25rem;
+}
+.shape-hero {
+  border-radius: 46% 54% 40% 60% / 38% 34% 66% 62%;
+}
+.shape-pebble {
+  border-radius: 58% 42% 46% 54% / 46% 56% 44% 54%;
+}
+.shape-arch {
+  border-radius: 999px 999px 1.5rem 1.5rem;
+}
+
+/* Облачный край цветных секций */
+.cloud-edge {
+  display: block;
+  height: 26px;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='26'%3E%3Cpath d='M0 26c0-9 7-16 16-16 3 0 5 1 8 2C27 5 34 0 44 0c9 0 17 5 20 13 2-1 5-2 8-2 8 0 14 4 16 11 3 0 6 2 8 4Z'/%3E%3C/svg%3E")
+    repeat-x bottom / 96px 26px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='26'%3E%3Cpath d='M0 26c0-9 7-16 16-16 3 0 5 1 8 2C27 5 34 0 44 0c9 0 17 5 20 13 2-1 5-2 8-2 8 0 14 4 16 11 3 0 6 2 8 4Z'/%3E%3C/svg%3E")
+    repeat-x bottom / 96px 26px;
+}
+.cloud-edge-flip {
+  transform: scaleY(-1);
+}
+
+/* Лёгкая анимация декора: только transform и opacity */
+@keyframes drift {
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+@keyframes sway {
+  50% {
+    transform: rotate(6deg);
+  }
+}
+@keyframes twinkle {
+  50% {
+    transform: scale(0.82) rotate(12deg);
+    opacity: 0.7;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+}
+.anim-drift {
+  animation: drift 7s ease-in-out infinite;
+}
+.anim-drift-slow {
+  animation: drift 10s ease-in-out infinite;
+}
+.anim-sway {
+  animation: sway 6s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+.anim-twinkle {
+  animation: twinkle 4.5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim-rise {
+  animation: rise 0.6s var(--ease-gentle) both;
+}
+
+/* Полноэкранный просмотр и мобильное меню */
+dialog.sheet {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: var(--color-milk);
+  color: var(--color-ink);
+}
+dialog.menu-sheet {
+  position: fixed;
+  inset: 0 0 auto;
+  width: 100%;
+  max-width: none;
+  max-height: 100dvh;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  overflow-y: auto;
+  background: var(--color-milk);
+  color: var(--color-ink);
+  border-radius: 0 0 2rem 2rem;
+}
+dialog.menu-sheet::backdrop {
+  background: rgb(40 60 70 / 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
