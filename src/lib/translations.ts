@@ -128,7 +128,7 @@ const kk: Translation = {
   hero: {
     titleBefore: "AGANIN KIDS — балаңыздың",
     titleAccent: "бақытты",
-    titleAfter: "балалық шағы!",
+    titleAfter: "балалық шағы",
     subtitle: "3–6 жас аралығындағы балаларға арналған жайлы әрі қызықты орта",
     contact: "Бізбен байланысу",
     more: "Толығырақ",
@@ -254,7 +254,7 @@ const ru: Translation = {
   hero: {
     titleBefore: "AGANIN KIDS —",
     titleAccent: "счастливое",
-    titleAfter: "детство вашего ребёнка!",
+    titleAfter: "детство вашего ребёнка",
     subtitle: "Уютная и интересная среда для детей от 3 до 6 лет",
     contact: "Связаться с нами",
     more: "Подробнее",

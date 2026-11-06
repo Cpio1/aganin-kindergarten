@@ -5,5 +5,5 @@ export const contentType = "image/png";
 
 /* iOS не поддерживает прозрачные значки, поэтому логотип лежит на молочном фоне. */
 export default function AppleIcon() {
-  return renderBrandIcon(size.width, "#FFFDF6");
+  return renderBrandIcon(size.width, "#FFFFFF");
 }

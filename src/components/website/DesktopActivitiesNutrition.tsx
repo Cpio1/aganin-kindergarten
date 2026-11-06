@@ -1,6 +1,7 @@
 "use client";
 
-import { Cloud, Star } from "@/components/shared/Art";
+import { accentAt } from "@/components/shared/accents";
+import { Cloud } from "@/components/shared/Art";
 import { PlateRing } from "@/components/shared/FoodArt";
 import { ActivityIcon, WhatsAppIcon } from "@/components/shared/Icons";
 import { useLocale } from "@/components/shared/LocaleProvider";
@@ -8,18 +9,15 @@ import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { ACTIVITY_IDS, whatsappUrl } from "@/lib/site-data";
 
-const ICON_BG = ["bg-sun", "bg-peach", "bg-mint", "bg-sun-soft", "bg-peach-soft", "bg-mint-soft", "bg-sun"];
-const SHAPES = ["shape-a", "shape-b", "shape-d", "shape-c"];
-
 export function DesktopActivities() {
   const { t } = useLocale();
 
   return (
     <section id="activities" className="relative mt-7">
-      <span className="cloud-edge absolute inset-x-0 -top-[25px] text-mint" aria-hidden="true" />
-      <div className="relative overflow-hidden bg-mint py-11">
-        <Star className="anim-twinkle absolute top-10 left-[8%] size-6 text-milk" />
-        <Cloud className="anim-drift absolute top-9 right-[10%] w-24 text-mint-soft" />
+      <span className="cloud-edge absolute inset-x-0 -top-[25px] text-mint-soft" aria-hidden="true" />
+      <div className="relative overflow-hidden bg-mint-soft py-11">
+        <Cloud className="anim-drift absolute top-9 right-[10%] w-24 text-white" />
+        <Cloud className="anim-drift-slow absolute top-20 left-[7%] w-16 text-white" />
         <div className="relative mx-auto max-w-[1180px] px-6">
           <Reveal>
             <SectionHeading
@@ -27,23 +25,18 @@ export function DesktopActivities() {
               kicker={t.activities.kicker}
               title={t.activities.title}
               lead={t.activities.lead}
-              squiggleClass="text-milk"
-              className="max-w-2xl [&_p]:text-ink"
+              className="max-w-2xl"
             />
           </Reveal>
-          <ul className="mt-6 grid grid-cols-4 gap-3.5">
+          <ul className="mt-7 grid grid-cols-4 gap-4">
             {ACTIVITY_IDS.map((id, index) => (
               <li key={id}>
                 <Reveal delay={(index % 4) * 0.07} className="h-full">
-                  <article
-                    className={`group ${SHAPES[index % SHAPES.length]} h-full bg-milk p-4 shadow-soft transition-transform duration-300 ease-gentle hover:-translate-y-1`}
-                  >
-                    <span
-                      className={`shape-pebble flex size-13 items-center justify-center ${ICON_BG[index]} transition-transform duration-300 ease-gentle group-hover:-rotate-6`}
-                    >
-                      <ActivityIcon id={id} className="size-7.5" />
+                  <article className={`card card-hover group h-full p-4 ${accentAt(index)}`}>
+                    <span className={`tile size-14 ${index % 2 ? "tile-alt" : ""}`}>
+                      <ActivityIcon id={id} className="size-8" />
                     </span>
-                    <h3 className="mt-2.5 text-[1.06rem] leading-tight font-bold">
+                    <h3 className="mt-3.5 text-[1.08rem] leading-tight font-bold">
                       {t.activities.items[id].name}
                     </h3>
                     <p className="mt-1 text-[0.88rem] leading-snug text-ink-soft">
@@ -55,15 +48,15 @@ export function DesktopActivities() {
             ))}
             <li>
               <Reveal delay={0.21} className="h-full">
-                <div className="shape-c flex h-full flex-col justify-between gap-3 bg-ink p-4 text-milk shadow-soft">
-                  <p className="font-display text-[1.06rem] leading-tight font-semibold">
+                <div className="flex h-full flex-col justify-between gap-3 rounded-[1.35rem] bg-mint p-4 shadow-soft">
+                  <p className="font-display text-[1.08rem] leading-tight font-bold">
                     {t.activities.ctaTitle}
                   </p>
                   <a
                     href={whatsappUrl(t.activities.ctaMessage)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-sun self-start !min-h-10 !px-3 !text-sm"
+                    className="btn btn-ink self-start !min-h-10 !px-3 !text-sm"
                   >
                     <WhatsAppIcon className="size-4.5" />
                     {t.activities.cta}
@@ -74,7 +67,7 @@ export function DesktopActivities() {
           </ul>
         </div>
       </div>
-      <span className="cloud-edge cloud-edge-flip absolute inset-x-0 -bottom-[25px] z-10 text-mint" aria-hidden="true" />
+      <span className="cloud-edge cloud-edge-flip absolute inset-x-0 -bottom-[25px] z-10 text-mint-soft" aria-hidden="true" />
     </section>
   );
 }
@@ -84,7 +77,6 @@ export function DesktopNutrition() {
 
   return (
     <section id="nutrition" className="relative overflow-hidden pt-16 pb-12">
-      <div className="absolute top-14 -right-24 size-[26rem] rounded-full bg-sun-soft" aria-hidden="true" />
       <div className="relative mx-auto grid max-w-[1180px] items-center gap-10 px-6 lg:grid-cols-[1fr_0.82fr]">
         <Reveal className="max-w-md">
           <SectionHeading kicker={t.nutrition.kicker} title={t.nutrition.title} lead={t.nutrition.text} />
@@ -92,7 +84,7 @@ export function DesktopNutrition() {
             href={whatsappUrl(t.nutrition.ctaMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-mint mt-4"
+            className="btn btn-green mt-4"
           >
             <WhatsAppIcon className="size-5" />
             {t.nutrition.cta}

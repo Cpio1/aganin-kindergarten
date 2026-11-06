@@ -2,10 +2,13 @@ import "server-only";
 import sharp from "sharp";
 import { findLogoFile } from "./media";
 
-/** Запасной значок (звезда на мятном фоне), пока логотип не загружен. */
+/** Запасной значок (цветные блоки KIDS), пока логотип не загружен. */
 const fallbackIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="18" fill="#A8E6CF"/>
-  <path fill="#FFE28A" stroke="#283C46" stroke-width="3" stroke-linejoin="round" d="M32 11l6.3 13.6 14.7 1.8-10.9 10.1 2.9 14.7L32 43.9l-13 7.3 2.9-14.7L11 26.4l14.7-1.8Z"/>
+  <rect width="64" height="64" rx="16" fill="#FFFFFF"/>
+  <rect x="7" y="7" width="23" height="23" rx="6" fill="#7ED957"/>
+  <rect x="34" y="7" width="23" height="23" rx="6" fill="#F6C445"/>
+  <rect x="7" y="34" width="23" height="23" rx="6" fill="#8DB4FF"/>
+  <rect x="34" y="34" width="23" height="23" rx="6" fill="#F47CC3"/>
 </svg>`;
 
 /** PNG-значок с логотипом: пропорции и прозрачность сохраняются. */
@@ -27,6 +30,10 @@ export async function renderBrandIcon(size: number, background?: string): Promis
         })
     : sharp(Buffer.from(fallbackIcon), { density: 300 }).resize(size, size);
 
-  const png = await (background ? image.flatten({ background }) : image).png().toBuffer();
+  // Заливка идёт вторым шагом: в одном конвейере sharp выполнит её раньше, чем добавит поля.
+  const fitted = await image.png().toBuffer();
+  const png = background
+    ? await sharp(fitted).flatten({ background }).png().toBuffer()
+    : fitted;
   return new Response(new Uint8Array(png), { headers: { "Content-Type": "image/png" } });
 }

@@ -2,7 +2,7 @@
 
 import { Clock, GraduationCap, MessageCircle, UtensilsCrossed } from "lucide-react";
 import { AboutMedia } from "@/components/shared/AboutMedia";
-import { Cloud, GroupCharacter, Star } from "@/components/shared/Art";
+import { GroupCharacter } from "@/components/shared/Art";
 import { useLocale } from "@/components/shared/LocaleProvider";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
@@ -23,12 +23,15 @@ function StatCard({
   delay: number;
 }) {
   return (
-    <Reveal delay={delay} className={`transition-transform duration-300 ease-gentle hover:-translate-y-1 ${className}`}>
-      <p className="flex h-full flex-col justify-center p-4 text-[0.92rem] leading-snug font-medium">
-        {stat.before && <span>{stat.before}</span>}
-        <span className={`font-display ${valueClass} leading-[1.1] font-bold`}>{stat.value}</span>
-        {stat.after && <span>{stat.after}</span>}
-      </p>
+    <Reveal delay={delay} className={className}>
+      <div className="card card-hover h-full">
+        <span className="absolute top-3 right-3 size-3.5 rotate-12 rounded-[4px] bg-(--accent)" aria-hidden="true" />
+        <p className="flex h-full flex-col justify-center p-4 text-[0.92rem] leading-snug font-medium">
+          {stat.before && <span>{stat.before}</span>}
+          <span className={`font-display ${valueClass} leading-[1.1] font-extrabold`}>{stat.value}</span>
+          {stat.after && <span>{stat.after}</span>}
+        </p>
+      </div>
     </Reveal>
   );
 }
@@ -39,15 +42,13 @@ export function DesktopAbout({ media }: { media: SiteMedia }) {
 
   return (
     <section id="about" className="relative py-12">
-      <div className="mx-auto grid max-w-[1180px] items-center gap-10 px-6 lg:grid-cols-[0.82fr_1fr]">
-        <Reveal className="relative">
-          <div className="absolute -inset-3 -z-10 rotate-[-3deg] shape-c bg-peach-soft" aria-hidden="true" />
+      <div className="mx-auto grid max-w-[1180px] items-center gap-12 px-6 lg:grid-cols-[0.82fr_1fr]">
+        <Reveal className="relative mr-2.5 mb-2.5">
           <AboutMedia
             media={media.about}
             sizes="(min-width: 1180px) 500px, 42vw"
-            className="shape-c"
+            className="photo-frame"
           />
-          <Star className="anim-twinkle absolute -top-3 -right-2 size-8 text-sun-deep" />
         </Reveal>
 
         <div>
@@ -55,16 +56,16 @@ export function DesktopAbout({ media }: { media: SiteMedia }) {
             <SectionHeading kicker={t.about.kicker} title={t.about.title} lead={t.about.lead} />
           </Reveal>
           <div className="mt-5 grid grid-cols-6 gap-3">
-            <StatCard stat={cards.groups} delay={0} className="shape-a col-span-2 bg-mint" />
-            <StatCard stat={cards.age} delay={0.06} className="shape-b col-span-2 bg-sun" />
-            <StatCard stat={cards.meals} delay={0.12} className="shape-d col-span-2 bg-peach" />
+            <StatCard stat={cards.groups} delay={0} className="accent-green col-span-2" />
+            <StatCard stat={cards.age} delay={0.06} className="accent-yellow col-span-2" />
+            <StatCard stat={cards.meals} delay={0.12} className="accent-blue col-span-2" />
             <StatCard
               stat={cards.language}
               delay={0.18}
               valueClass="text-[1.3rem]"
-              className="shape-b col-span-3 bg-mint-soft"
+              className="accent-pink col-span-3"
             />
-            <StatCard stat={cards.clubs} delay={0.24} className="shape-a col-span-3 bg-sun-soft" />
+            <StatCard stat={cards.clubs} delay={0.24} className="accent-mint col-span-3" />
           </div>
         </div>
       </div>
@@ -72,53 +73,52 @@ export function DesktopAbout({ media }: { media: SiteMedia }) {
   );
 }
 
-const ARCH_BG = ["bg-mint", "bg-sun", "bg-peach-soft"];
-const ARCH_OFFSET = ["", "mt-7", "mt-2"];
+const GROUP_STYLE = [
+  { accent: "accent-blue", window: "bg-blue" },
+  { accent: "accent-pink", window: "bg-pink-soft" },
+  { accent: "accent-yellow", window: "bg-yellow-soft" },
+];
+const SHARED_CHIP = "flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 ring-1 ring-ink/8";
 
 export function DesktopGroups() {
   const { t, locale } = useLocale();
 
   return (
-    <section id="groups" className="relative overflow-hidden bg-mint-soft/60 py-12">
-      <Cloud className="anim-drift-slow absolute top-5 left-[38%] w-24 text-milk" />
+    <section id="groups" className="relative bg-paper py-12">
       <div className="mx-auto grid max-w-[1180px] items-center gap-10 px-6 lg:grid-cols-[0.72fr_1fr]">
         <Reveal>
-          <SectionHeading
-            kicker={t.groups.kicker}
-            title={t.groups.title}
-            lead={t.groups.lead}
-            squiggleClass="text-mint-deep"
-          />
+          <SectionHeading kicker={t.groups.kicker} title={t.groups.title} lead={t.groups.lead} />
           <p className="font-display mt-4 text-sm font-semibold">{t.groups.sharedTitle}:</p>
           <ul className="mt-2 flex flex-wrap gap-2 text-sm font-medium">
-            <li className="flex items-center gap-1.5 rounded-full bg-milk px-3 py-1.5 shadow-soft">
+            <li className={SHARED_CHIP}>
               <GraduationCap className="size-4" aria-hidden="true" />
               {t.groups.shared.language}
             </li>
-            <li className="flex items-center gap-1.5 rounded-full bg-milk px-3 py-1.5 shadow-soft">
+            <li className={SHARED_CHIP}>
               <UtensilsCrossed className="size-4" aria-hidden="true" />
               {t.groups.shared.meals}
             </li>
-            <li className="flex items-center gap-1.5 rounded-full bg-milk px-3 py-1.5 shadow-soft">
+            <li className={SHARED_CHIP}>
               <Clock className="size-4" aria-hidden="true" />
               {siteData.hours}
             </li>
           </ul>
         </Reveal>
 
-        <ul className="grid grid-cols-3 gap-4 pb-6">
+        <ul className="grid grid-cols-3 gap-4">
           {siteData.groups.map((group, index) => {
             const name = group.name[locale];
+            const style = GROUP_STYLE[index % GROUP_STYLE.length];
             return (
-              <li key={group.id} className={ARCH_OFFSET[index]}>
-                <Reveal delay={index * 0.08}>
-                  <article className="shape-arch group bg-milk p-2.5 shadow-soft transition-transform duration-300 ease-gentle hover:-translate-y-1.5">
+              <li key={group.id}>
+                <Reveal delay={index * 0.08} className="h-full">
+                  <article className={`card card-hover group h-full p-2.5 ${style.accent}`}>
                     <div
-                      className={`shape-arch flex aspect-[1/1.05] items-end justify-center overflow-hidden ${ARCH_BG[index]}`}
+                      className={`flex aspect-square items-center justify-center overflow-hidden rounded-2xl ${style.window}`}
                     >
                       <GroupCharacter
                         art={group.art}
-                        className="mb-[10%] w-[66%] transition-transform duration-500 ease-gentle group-hover:scale-105 group-hover:-rotate-3"
+                        className="w-[66%] transition-transform duration-500 ease-gentle group-hover:scale-105 group-hover:-rotate-3"
                       />
                     </div>
                     <div className="px-1.5 pt-2.5 pb-1.5 text-center">
@@ -128,7 +128,7 @@ export function DesktopGroups() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${t.groups.ask}: ${name} (${t.a11y.newTab})`}
-                        className="mt-1 inline-flex min-h-9 items-center gap-1.5 text-[0.82rem] font-medium underline decoration-mint-deep decoration-2 underline-offset-4 hover:decoration-ink"
+                        className="mt-1 inline-flex min-h-9 items-center gap-1.5 text-[0.82rem] font-medium underline decoration-(--accent) decoration-2 underline-offset-4 hover:decoration-ink"
                       >
                         <MessageCircle className="size-3.5 shrink-0" aria-hidden="true" />
                         {t.groups.ask}

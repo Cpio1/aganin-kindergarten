@@ -28,7 +28,7 @@ export function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
-const ink = "#283C46";
+const ink = "#111111";
 
 /** Иконки кружков в одном стиле: одинаково выглядят на всех устройствах, в отличие от эмодзи. */
 export function ActivityIcon({ id, className }: { id: ActivityId; className?: string }) {
@@ -38,15 +38,15 @@ export function ActivityIcon({ id, className }: { id: ActivityId; className?: st
         <g>
           <path fill={ink} d="M13 42c0-2 1-4 3-4h16c2 0 3 2 3 4 0 1-1 2-2 2H15c-1 0-2-1-2-2Z" />
           <path fill={ink} d="M18 36c0-5 7-8 8-14l-7 3c-2 1-4 1-5-1-1-1-1-3 0-4l7-9c0-3 1-5 3-6l2 3c7 1 12 7 12 15 0 5-1 9-3 13Z" />
-          <circle cx="23.500" cy="14.500" r="2" fill="#FFFDF6" />
+          <circle cx="23.500" cy="14.500" r="2" fill="#FFFFFF" />
         </g>
       )}
       {id === "speech" && (
         <g>
           <path fill={ink} d="M24 6c10 0 18 7 18 16s-8 16-18 16c-2 0-4 0-6-1l-8 5c-1 1-3 0-2-2l2-7c-3-3-4-7-4-11C6 13 14 6 24 6Z" />
-          <circle cx="17" cy="20" r="2.300" fill="#FFFDF6" />
-          <circle cx="31" cy="20" r="2.300" fill="#FFFDF6" />
-          <path d="M18 26c3 4 9 4 12 0" fill="none" stroke="#FFFDF6" strokeWidth="2.600" strokeLinecap="round" />
+          <circle cx="17" cy="20" r="2.300" fill="#FFFFFF" />
+          <circle cx="31" cy="20" r="2.300" fill="#FFFFFF" />
+          <path d="M18 26c3 4 9 4 12 0" fill="none" stroke="#FFFFFF" strokeWidth="2.600" strokeLinecap="round" />
         </g>
       )}
       {id === "dance" && (
@@ -83,7 +83,7 @@ export function ActivityIcon({ id, className }: { id: ActivityId; className?: st
       {id === "english" && (
         <g>
           <path fill={ink} d="M8 8h32c2 0 3 1 3 3v21c0 2-1 3-3 3H22l-9 8c-1 1-3 0-3-1v-7H8c-2 0-3-1-3-3V11c0-2 1-3 3-3Z" />
-          <text x="24" y="28" textAnchor="middle" fontFamily="var(--font-rubik), sans-serif" fontWeight="700" fontSize="15" fill="#FFFDF6">
+          <text x="24" y="28" textAnchor="middle" fontFamily="var(--font-rubik), sans-serif" fontWeight="700" fontSize="15" fill="#FFFFFF">
             ABC
           </text>
         </g>
@@ -91,9 +91,9 @@ export function ActivityIcon({ id, className }: { id: ActivityId; className?: st
       {id === "aikido" && (
         <g>
           <path fill={ink} d="M14 5h20l7 8-6 6-3-3v27H16V16l-3 3-6-6Z" />
-          <path fill="#FFFDF6" d="m24 19-7-13h4l3 7 3-7h4Z" />
-          <path fill="#FFFDF6" d="M16 26h16v4H16Z" />
-          <path fill="#FFFDF6" d="m20 30 3 2-3 7h-3Zm8 0-3 2 3 7h3Z" />
+          <path fill="#FFFFFF" d="m24 19-7-13h4l3 7 3-7h4Z" />
+          <path fill="#FFFFFF" d="M16 26h16v4H16Z" />
+          <path fill="#FFFFFF" d="m20 30 3 2-3 7h-3Zm8 0-3 2 3 7h3Z" />
         </g>
       )}
     </svg>

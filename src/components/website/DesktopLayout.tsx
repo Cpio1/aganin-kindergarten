@@ -16,7 +16,7 @@ export function DesktopLayout({ media }: { media: SiteMedia }) {
     <>
       <a
         href="#main"
-        className="btn btn-sun fixed top-2 left-2 z-50 -translate-y-20 focus-visible:translate-y-0"
+        className="btn btn-mint fixed top-2 left-2 z-50 -translate-y-20 focus-visible:translate-y-0"
       >
         {t.a11y.skip}
       </a>

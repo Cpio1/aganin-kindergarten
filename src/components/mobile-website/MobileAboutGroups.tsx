@@ -11,16 +11,14 @@ import { siteData, whatsappUrl } from "@/lib/site-data";
 
 type Stat = { before?: string; value: string; after?: string };
 
-function MiniStat({ stat, className, wide = false }: { stat: Stat; className: string; wide?: boolean }) {
+function MiniStat({ stat, accent }: { stat: Stat; accent: string }) {
   return (
-    <Reveal className={wide ? "col-span-2" : ""}>
+    <Reveal>
       <p
-        className={`flex h-full flex-col justify-center px-3 py-2.5 text-[0.82rem] leading-tight font-medium ${className}`}
+        className={`card-soft flex h-full flex-col justify-center px-3 py-2.5 text-[0.82rem] leading-tight font-medium ${accent}`}
       >
         {stat.before && <span>{stat.before}</span>}
-        <span className={`font-display font-bold ${wide ? "text-lg" : "text-[1.85rem] leading-[1.1]"}`}>
-          {stat.value}
-        </span>
+        <span className="font-display text-[1.85rem] leading-[1.1] font-extrabold">{stat.value}</span>
         {stat.after && <span>{stat.after}</span>}
       </p>
     </Reveal>
@@ -37,47 +35,51 @@ export function MobileAbout({ media }: { media: SiteMedia }) {
         <SectionHeading kicker={t.about.kicker} title={t.about.title} lead={t.about.lead} />
       </Reveal>
       <div className="mt-3.5 grid grid-cols-3 gap-2">
-        <MiniStat stat={cards.groups} className="shape-a bg-mint" />
-        <MiniStat stat={cards.age} className="shape-b bg-sun" />
-        <MiniStat stat={cards.meals} className="shape-d bg-peach" />
+        <MiniStat stat={cards.groups} accent="accent-green" />
+        <MiniStat stat={cards.age} accent="accent-yellow" />
+        <MiniStat stat={cards.meals} accent="accent-blue" />
       </div>
       <div className="mt-2 grid grid-cols-2 gap-2">
         <Reveal>
-          <p className="shape-b flex h-full flex-col justify-center bg-mint-soft px-3 py-2.5 text-[0.82rem] leading-tight font-medium">
+          <p className="card-soft accent-pink flex h-full flex-col justify-center px-3 py-2.5 text-[0.82rem] leading-tight font-medium">
             {cards.language.before && <span>{cards.language.before}</span>}
             <span className="font-display text-[1.02rem] leading-tight font-bold">{cards.language.value}</span>
             {cards.language.after && <span>{cards.language.after}</span>}
           </p>
         </Reveal>
-        <MiniStat stat={cards.clubs} className="shape-a bg-sun-soft" />
+        <MiniStat stat={cards.clubs} accent="accent-mint" />
       </div>
-      <Reveal className="mx-auto mt-4 sm:max-w-md">
-        <AboutMedia media={media.about} sizes="(min-width: 640px) 448px, 100vw" className="shape-c" />
+      <Reveal className="mx-auto mt-4 mr-1.5 mb-1.5 sm:mx-auto sm:max-w-md">
+        <AboutMedia media={media.about} sizes="(min-width: 640px) 448px, 100vw" className="photo-frame-sm" />
       </Reveal>
     </section>
   );
 }
 
-const ARCH_BG = ["bg-mint", "bg-sun", "bg-peach-soft"];
+const GROUP_STYLE = [
+  { accent: "accent-blue", window: "bg-blue" },
+  { accent: "accent-pink", window: "bg-pink-soft" },
+  { accent: "accent-yellow", window: "bg-yellow-soft" },
+];
 
-/** Три маленьких окошка в ряд: вся группа умещается на одном экране без прокрутки вбок. */
+/** Три маленькие карточки в ряд: вся группа умещается на одном экране без прокрутки вбок. */
 export function MobileGroups() {
   const { t, locale } = useLocale();
 
   return (
-    <section id="groups" className="bg-mint-soft/60 py-6">
+    <section id="groups" className="bg-paper py-6">
       <div className="mx-auto max-w-2xl px-4">
         <Reveal>
           <SectionHeading
             kicker={t.groups.kicker}
             title={t.groups.title}
             lead={t.groups.lead}
-            squiggleClass="text-mint-deep"
           />
         </Reveal>
         <ul className="mt-3.5 grid grid-cols-3 gap-2">
           {siteData.groups.map((group, index) => {
             const name = group.name[locale];
+            const style = GROUP_STYLE[index % GROUP_STYLE.length];
             return (
               <li key={group.id}>
                 <Reveal delay={index * 0.07} className="h-full">
@@ -86,12 +88,12 @@ export function MobileGroups() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${t.groups.ask}: ${name} (${t.a11y.newTab})`}
-                    className="shape-arch block h-full bg-milk p-1.5 pb-2.5 text-center shadow-soft active:scale-[0.98]"
+                    className={`card block h-full !rounded-2xl p-1.5 pb-2.5 text-center active:scale-[0.98] ${style.accent}`}
                   >
                     <span
-                      className={`shape-arch flex aspect-square items-end justify-center overflow-hidden ${ARCH_BG[index]}`}
+                      className={`flex aspect-square items-center justify-center overflow-hidden rounded-xl ${style.window}`}
                     >
-                      <GroupCharacter art={group.art} className="mb-[8%] w-[70%]" />
+                      <GroupCharacter art={group.art} className="w-[70%]" />
                     </span>
                     <span className="font-display mt-1.5 block text-[0.95rem] leading-tight font-bold">{name}</span>
                   </a>
@@ -101,15 +103,15 @@ export function MobileGroups() {
           })}
         </ul>
         <ul className="mt-3 flex flex-wrap gap-1.5 text-[0.8rem] font-medium">
-          <li className="flex items-center gap-1 rounded-full bg-milk px-2.5 py-1 shadow-soft">
+          <li className="flex items-center gap-1 rounded-full bg-white px-2.5 py-1 ring-1 ring-ink/8">
             <GraduationCap className="size-3.5" aria-hidden="true" />
             {t.groups.shared.language}
           </li>
-          <li className="flex items-center gap-1 rounded-full bg-milk px-2.5 py-1 shadow-soft">
+          <li className="flex items-center gap-1 rounded-full bg-white px-2.5 py-1 ring-1 ring-ink/8">
             <UtensilsCrossed className="size-3.5" aria-hidden="true" />
             {t.groups.shared.meals}
           </li>
-          <li className="flex items-center gap-1 rounded-full bg-milk px-2.5 py-1 shadow-soft">
+          <li className="flex items-center gap-1 rounded-full bg-white px-2.5 py-1 ring-1 ring-ink/8">
             <Clock className="size-3.5" aria-hidden="true" />
             {siteData.hours}
           </li>

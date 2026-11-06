@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 import sharp from "sharp";
 import { findHeroFile, findLogoFile } from "@/lib/media";
 
-export const alt = "AGANIN KIDS — балаңыздың бақытты балалық шағы!";
+export const alt = "AGANIN KIDS — балаңыздың бақытты балалық шағы";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -27,8 +27,8 @@ export default async function OpenGraphImage() {
         height: "100%",
         display: "flex",
         position: "relative",
-        background: "#FFFDF6",
-        color: "#283C46",
+        background: "#FFFFFF",
+        color: "#111111",
         fontFamily: "Rubik",
         padding: 64,
       }}
@@ -41,7 +41,7 @@ export default async function OpenGraphImage() {
           width: 520,
           height: 520,
           borderRadius: 999,
-          background: "#FFE28A",
+          background: "#F6C445",
         }}
       />
       <div
@@ -52,7 +52,7 @@ export default async function OpenGraphImage() {
           width: 1000,
           height: 460,
           borderRadius: 999,
-          background: "#A8E6CF",
+          background: "#BDF3F3",
         }}
       />
       <div
@@ -68,9 +68,11 @@ export default async function OpenGraphImage() {
         {logo ? (
           <img alt="" src={logo} style={{ alignSelf: "flex-start", maxHeight: 110, maxWidth: 360 }} />
         ) : null}
-        <div style={{ fontSize: 72, lineHeight: 1.05 }}>AGANIN KIDS</div>
+        {logo ? null : (
+          <div style={{ fontSize: 72, lineHeight: 1.05, textShadow: "4px 4px 0 #BDF3F3" }}>AGANIN KIDS</div>
+        )}
         <div style={{ fontSize: 44, lineHeight: 1.2, maxWidth: 640 }}>
-          балаңыздың бақытты балалық шағы!
+          балаңыздың бақытты балалық шағы
         </div>
         <div style={{ fontSize: 28 }}>3–6 жас · 08:00–18:00</div>
       </div>
@@ -80,7 +82,7 @@ export default async function OpenGraphImage() {
           src={hero}
           width={460}
           height={502}
-          style={{ position: "relative", borderRadius: "48px 160px 48px 160px", objectFit: "cover" }}
+          style={{ position: "relative", borderRadius: 48, boxShadow: "16px 16px 0 #BDF3F3", objectFit: "cover" }}
         />
       ) : null}
     </div>,

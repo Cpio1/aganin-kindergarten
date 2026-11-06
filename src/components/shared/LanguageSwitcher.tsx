@@ -15,7 +15,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
     <div
       role="group"
       aria-label={t.a11y.language}
-      className={`inline-flex shrink-0 rounded-full bg-mint-soft p-0.5 ${className}`}
+      className={`inline-flex shrink-0 rounded-full bg-paper p-0.5 ring-1 ring-ink/10 ${className}`}
     >
       {OPTIONS.map((option) => {
         const active = option.locale === locale;
@@ -27,7 +27,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
             aria-pressed={active}
             onClick={() => setLocale(option.locale)}
             className={`font-display min-h-9 min-w-10 rounded-full px-2 text-xs font-semibold transition-colors ${
-              active ? "bg-ink text-milk" : "text-ink hover:bg-mint"
+              active ? "bg-mint text-ink" : "text-ink-soft hover:text-ink"
             }`}
           >
             {option.label}

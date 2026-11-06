@@ -9,7 +9,7 @@ import "./globals.css";
 /* Обе гарнитуры проверены по таблице символов: Ә Ғ Қ Ң Ө Ұ Ү Һ І есть (подмножество cyrillic-ext). */
 const display = Rubik({
   subsets: ["cyrillic", "cyrillic-ext", "latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   variable: "--font-rubik",
   display: "swap",
 });
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FFFDF6",
+  themeColor: "#FFFFFF",
 };
 
 /* Только подтверждённые сведения: без рейтингов, лицензий и выдуманных дней работы. */

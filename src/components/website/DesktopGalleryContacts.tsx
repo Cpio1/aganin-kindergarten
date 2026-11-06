@@ -1,7 +1,7 @@
 "use client";
 
 import { Clock, ExternalLink, MapPin, Phone } from "lucide-react";
-import { DocumentsArt, Star } from "@/components/shared/Art";
+import { DocumentsArt } from "@/components/shared/Art";
 import { GalleryGrid } from "@/components/shared/GalleryGrid";
 import { InstagramIcon, WhatsAppIcon } from "@/components/shared/Icons";
 import { useLocale } from "@/components/shared/LocaleProvider";
@@ -15,16 +15,14 @@ export function DesktopGallery({ media }: { media: SiteMedia }) {
   const { t } = useLocale();
 
   return (
-    <section id="gallery" className="relative bg-peach-soft/60 py-12">
-      <Star className="anim-twinkle absolute top-12 left-[12%] size-6 text-peach" />
+    <section id="gallery" className="relative py-12">
       <div className="mx-auto max-w-[1100px] px-6">
         <Reveal>
           <SectionHeading center kicker={t.gallery.kicker} title={t.gallery.title} className="mb-6" />
         </Reveal>
         <GalleryGrid
           images={media.gallery}
-          columns={3}
-          gapClass="gap-3.5"
+          gridClass="grid-cols-3 gap-4"
           sizes="(min-width: 1100px) 340px, 31vw"
         />
       </div>
@@ -39,7 +37,7 @@ export function DesktopDocuments() {
   return (
     <section id="documents" className="px-6 py-11">
       <Reveal className="mx-auto max-w-[1000px]">
-        <div className="shape-a flex items-center gap-7 bg-sun px-8 py-6 shadow-soft">
+        <div className="card-soft accent-yellow flex items-center gap-7 !rounded-[1.75rem] px-8 py-6">
           <DocumentsArt className="w-28 shrink-0" />
           <div className="flex-1">
             <p className="font-display text-sm font-semibold">{documents.kicker}</p>
@@ -84,8 +82,8 @@ export function DesktopContacts() {
     <section id="contacts" className="pt-3 pb-8">
       <div className="mx-auto grid max-w-[1180px] gap-6 px-6 lg:grid-cols-[0.86fr_1fr]">
         <Reveal>
-          <SectionHeading kicker={contacts.kicker} title={contacts.title} squiggleClass="text-mint-deep" />
-          <address className="shape-b mt-4 bg-mint-soft p-5 not-italic">
+          <SectionHeading kicker={contacts.kicker} title={contacts.title} />
+          <address className="card accent-mint mt-4 p-5 not-italic">
             <p className="font-display text-lg font-bold">{contacts.legalName}</p>
             <ul className="mt-2.5 space-y-2.5 text-[0.95rem]">
               <li className="flex gap-2.5">
@@ -121,7 +119,7 @@ export function DesktopContacts() {
                   <a
                     href={`tel:${phone.e164}`}
                     aria-label={`${contacts.call}: ${phone.display}`}
-                    className="btn btn-milk w-full !justify-start"
+                    className="btn btn-white w-full !justify-start"
                   >
                     <Phone className="size-4.5 shrink-0" aria-hidden="true" />
                     <span className="whitespace-nowrap">{phone.display}</span>
@@ -134,7 +132,7 @@ export function DesktopContacts() {
                   href={whatsappUrl(t.common.whatsappMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-mint w-full"
+                  className="btn btn-green w-full"
                 >
                   <WhatsAppIcon className="size-5" />
                   {contacts.whatsapp}
@@ -144,7 +142,7 @@ export function DesktopContacts() {
           </address>
         </Reveal>
         <Reveal delay={0.08}>
-          <MapCard className="shape-d h-full min-h-[24rem]" />
+          <MapCard className="h-full min-h-[24rem]" />
         </Reveal>
       </div>
     </section>

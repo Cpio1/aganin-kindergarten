@@ -13,20 +13,20 @@ export function DesktopHeader({ media }: { media: SiteMedia }) {
   const active = useActiveSection();
 
   return (
-    <header className="fixed inset-x-0 top-2.5 z-40 px-4">
-      <div className="mx-auto flex h-14 max-w-[1180px] items-center justify-between gap-3 rounded-full bg-milk/95 pr-2 pl-4 shadow-soft ring-1 ring-ink/5 backdrop-blur-sm">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-ink/8 bg-white/95 backdrop-blur-sm">
+      <div className="mx-auto flex h-16 max-w-[1180px] items-center gap-3 px-4 xl:px-6">
         <a href="#home" aria-label={t.a11y.home} className="flex min-h-11 shrink-0 items-center">
-          <Logo logo={media.logo} heightClass="h-10" priority />
+          <Logo logo={media.logo} heightClass="h-12" sizes="100px" priority />
         </a>
 
-        <nav aria-label={t.a11y.mainNav} className="min-w-0">
+        <nav aria-label={t.a11y.mainNav} className="ml-auto min-w-0">
           <ul className="flex items-center">
             {SECTION_IDS.map((id) => (
               <li key={id}>
                 <a
                   href={`#${id}`}
                   aria-current={active === id ? "true" : undefined}
-                  className={`font-display block rounded-full px-2.5 py-1.5 text-[0.84rem] font-medium whitespace-nowrap transition-colors xl:px-3 ${
+                  className={`font-display block rounded-full px-2 py-1.5 text-[0.84rem] font-medium whitespace-nowrap transition-colors xl:px-3 ${
                     active === id ? "bg-mint" : "hover:bg-mint-soft"
                   }`}
                 >
@@ -44,7 +44,7 @@ export function DesktopHeader({ media }: { media: SiteMedia }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`WhatsApp (${t.a11y.newTab})`}
-            className="btn btn-ink !min-h-10 !px-3 !text-sm"
+            className="btn btn-green !min-h-10 !px-3 !text-sm"
           >
             <WhatsAppIcon className="size-4.5" />
             <span className="hidden xl:inline">WhatsApp</span>

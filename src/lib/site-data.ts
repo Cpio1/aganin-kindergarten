@@ -41,11 +41,18 @@ export const siteData = {
   ],
 
   /**
+   * Фото первого экрана: файл из public/images. Сейчас main-page.jpeg содержит логотип,
+   * поэтому здесь указан снимок класса. Когда появится настоящее фото main-page,
+   * поставьте null, и сайт возьмёт его автоматически.
+   */
+  heroImage: "image6.jpeg" as string | null,
+
+  /**
    * Точка кадрирования фото (object-position). Подбирается по лицам на снимке,
    * когда фотографии загружены. В полноэкранном просмотре снимок виден целиком.
    */
-  heroFocus: "50% 40%",
-  aboutFocus: "50% 40%",
+  heroFocus: "50% 50%",
+  aboutFocus: "50% 50%",
 } as const;
 
 export type GroupArt = (typeof siteData.groups)[number]["art"];

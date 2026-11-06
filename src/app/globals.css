@@ -1,24 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-milk: #fffdf6;
-  --color-mint: #a8e6cf;
-  --color-mint-soft: #e0f8ee;
-  --color-mint-deep: #74d2b0;
-  --color-sun: #ffe28a;
-  --color-sun-soft: #fff5d1;
-  --color-sun-deep: #ffcf52;
-  --color-peach: #ffb69e;
-  --color-peach-soft: #ffe8df;
-  --color-peach-deep: #ff9676;
-  --color-ink: #283c46;
-  --color-ink-soft: #3f5661;
+  /* Палитра логотипа: белый фон, чёрный текст, мятная тень и цветные блоки KIDS. */
+  --color-paper: #f8fafc;
+  --color-ink: #111111;
+  --color-ink-soft: #4a5560;
+  --color-mint: #bdf3f3;
+  --color-mint-soft: #e8fbfb;
+  --color-mint-deep: #63d6d6;
+  --color-green: #7ed957;
+  --color-green-soft: #edfae6;
+  --color-yellow: #f6c445;
+  --color-yellow-soft: #fef6dc;
+  --color-blue: #8db4ff;
+  --color-blue-soft: #e9f0ff;
+  --color-pink: #f47cc3;
+  --color-pink-soft: #fdeaf6;
 
   --font-display: var(--font-rubik), "Trebuchet MS", sans-serif;
   --font-body: var(--font-onest), "Segoe UI", sans-serif;
 
-  --shadow-soft: 0 10px 28px -16px rgb(40 60 70 / 0.28);
-  --shadow-lift: 0 18px 38px -18px rgb(40 60 70 / 0.34);
+  --shadow-soft: 0 10px 26px -18px rgb(17 17 17 / 0.3);
+  --shadow-lift: 0 18px 36px -20px rgb(17 17 17 / 0.36);
 
   --ease-gentle: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -31,7 +34,7 @@ html {
 
 @media (min-width: 1024px) {
   html {
-    scroll-padding-top: 5.25rem;
+    scroll-padding-top: 5rem;
   }
 }
 
@@ -41,7 +44,7 @@ html.locale-pending body {
 }
 
 body {
-  background: var(--color-milk);
+  background: #fff;
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: 1rem;
@@ -57,6 +60,10 @@ h3 {
   font-family: var(--font-display);
   text-wrap: balance;
   overflow-wrap: break-word;
+}
+
+h1 {
+  text-wrap: pretty;
 }
 
 :focus-visible {
@@ -89,7 +96,12 @@ h3 {
 }
 .btn-ink {
   background: var(--color-ink);
-  color: var(--color-milk);
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+}
+.btn-green {
+  background: var(--color-green);
+  color: var(--color-ink);
   box-shadow: var(--shadow-soft);
 }
 .btn-mint {
@@ -97,56 +109,131 @@ h3 {
   color: var(--color-ink);
   box-shadow: var(--shadow-soft);
 }
-.btn-sun {
-  background: var(--color-sun);
+.btn-yellow {
+  background: var(--color-yellow);
   color: var(--color-ink);
   box-shadow: var(--shadow-soft);
 }
-.btn-milk {
-  background: var(--color-milk);
+.btn-white {
+  background: #fff;
   color: var(--color-ink);
-  box-shadow: var(--shadow-soft);
+  box-shadow: inset 0 0 0 1.5px rgb(17 17 17 / 0.14);
 }
 @media (hover: hover) {
   .btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lift);
   }
+  .btn-green:hover {
+    background: #71cf4a;
+  }
   .btn-mint:hover {
-    background: #98e0c5;
+    background: #a9eded;
   }
-  .btn-sun:hover {
-    background: #ffdb73;
+  .btn-yellow:hover {
+    background: #f2bb2c;
   }
-  .btn-milk:hover {
-    background: #fff;
+  .btn-white:hover {
+    box-shadow: 4px 4px 0 var(--color-mint), inset 0 0 0 1.5px var(--color-ink);
   }
   .btn-ink:hover {
-    background: #1f313a;
+    background: #2b2b2b;
   }
 }
 
-/* Асимметричные скругления вместо прямоугольных блоков */
-.shape-a {
-  border-radius: 2rem 1rem 2.25rem 1.1rem;
+/* Цветовая логика блоков KIDS: класс задаёт акцент, карточка и плашка его используют. */
+.accent-green {
+  --accent: var(--color-green);
+  --accent-soft: var(--color-green-soft);
 }
-.shape-b {
-  border-radius: 1.1rem 2.25rem 1rem 2rem;
+.accent-yellow {
+  --accent: var(--color-yellow);
+  --accent-soft: var(--color-yellow-soft);
 }
-.shape-c {
-  border-radius: 2.25rem 2.25rem 1rem 2.25rem;
+.accent-blue {
+  --accent: var(--color-blue);
+  --accent-soft: var(--color-blue-soft);
 }
-.shape-d {
-  border-radius: 1rem 2rem 2.25rem 2.25rem;
+.accent-pink {
+  --accent: var(--color-pink);
+  --accent-soft: var(--color-pink-soft);
 }
-.shape-hero {
-  border-radius: 46% 54% 40% 60% / 38% 34% 66% 62%;
+.accent-mint {
+  --accent: var(--color-mint-deep);
+  --accent-soft: var(--color-mint-soft);
 }
-.shape-pebble {
-  border-radius: 58% 42% 46% 54% / 46% 56% 44% 54%;
+
+/* Светлая карточка с тонким цветным контуром */
+.card {
+  position: relative;
+  background: #fff;
+  border: 1.5px solid color-mix(in srgb, var(--accent, var(--color-mint-deep)) 45%, #fff);
+  border-radius: 1.35rem;
+  box-shadow: var(--shadow-soft);
 }
-.shape-arch {
-  border-radius: 999px 999px 1.5rem 1.5rem;
+.card-soft {
+  background: var(--accent-soft);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, #fff);
+  border-radius: 1.1rem;
+}
+.card-hover {
+  transition:
+    transform 0.3s var(--ease-gentle),
+    box-shadow 0.3s var(--ease-gentle),
+    border-color 0.3s ease;
+}
+@media (hover: hover) {
+  .card-hover:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 6px 6px 0 var(--accent);
+  }
+}
+
+/* Цветная плашка, как буква в слове KIDS */
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  border-radius: 0.95rem;
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--accent) 72%, var(--color-ink));
+  transform: rotate(-4deg);
+  transition: transform 0.3s var(--ease-gentle);
+}
+.tile-alt {
+  transform: rotate(4deg);
+}
+@media (hover: hover) {
+  .group:hover .tile {
+    transform: rotate(0deg) scale(1.1);
+  }
+}
+
+/* Мятная тень логотипа */
+.brand-title {
+  font-weight: 800;
+  text-shadow: 0.05em 0.05em 0 var(--color-mint);
+}
+.photo-frame {
+  border-radius: 1.75rem;
+  box-shadow: 10px 10px 0 var(--color-mint);
+}
+.photo-frame-sm {
+  border-radius: 1.4rem;
+  box-shadow: 6px 6px 0 var(--color-mint);
+}
+
+/* Четырёхцветная полоса KIDS */
+.kids-stripe {
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--color-green) 0 25%,
+    var(--color-yellow) 25% 50%,
+    var(--color-blue) 50% 75%,
+    var(--color-pink) 75%
+  );
 }
 
 /* Облачный край цветных секций */
@@ -216,7 +303,7 @@ dialog.sheet {
   margin: 0;
   border: 0;
   padding: 0;
-  background: var(--color-milk);
+  background: #fff;
   color: var(--color-ink);
 }
 dialog.menu-sheet {
@@ -229,12 +316,12 @@ dialog.menu-sheet {
   border: 0;
   padding: 0;
   overflow-y: auto;
-  background: var(--color-milk);
+  background: #fff;
   color: var(--color-ink);
   border-radius: 0 0 2rem 2rem;
 }
 dialog.menu-sheet::backdrop {
-  background: rgb(40 60 70 / 0.4);
+  background: rgb(17 17 17 / 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {

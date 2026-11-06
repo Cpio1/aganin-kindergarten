@@ -2,6 +2,7 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
+import { siteData } from "./site-data";
 
 /**
  * Находит материалы при сборке. Новый файл подхватывается автоматически:
@@ -66,7 +67,10 @@ function findNamed(name: string, ext: RegExp): string | null {
   return null;
 }
 
+/** Фото первого экрана: файл из настроек, а если его нет, то main-page. */
 export function findHeroFile(): string | null {
+  const chosen = siteData.heroImage;
+  if (chosen && readFolder(inImages("")).includes(chosen)) return inImages(chosen);
   return findNamed("main-page", IMAGE_EXT);
 }
 

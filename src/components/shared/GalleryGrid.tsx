@@ -8,29 +8,27 @@ import { InstagramIcon } from "./Icons";
 import { Lightbox } from "./Lightbox";
 import { useLocale } from "./LocaleProvider";
 import { Reveal } from "./Reveal";
-import { useGallery, useMasonry } from "./useGallery";
+import { useGallery } from "./useGallery";
 
-const SHAPES = ["shape-a", "shape-b", "shape-d", "shape-c"];
-
-/** Сетка галереи. Число колонок задают версии сайта: это единственное различие в поведении. */
+/**
+ * Сетка галереи. Раскладку задают версии сайта. Карточки одной высоты показывают снимок
+ * без растягивания (object-cover), а при увеличении он виден целиком.
+ */
 export function GalleryGrid({
   images,
-  columns,
+  gridClass,
   sizes,
-  gapClass,
 }: {
   images: SitePhoto[];
-  columns: number;
+  gridClass: string;
   sizes: string;
-  gapClass: string;
 }) {
   const { t } = useLocale();
   const gallery = useGallery(images);
-  const masonry = useMasonry(gallery.visible, columns);
 
   if (images.length === 0) {
     return (
-      <Reveal className="shape-c mx-auto flex max-w-xl flex-col items-center gap-3 bg-milk p-6 text-center shadow-soft">
+      <Reveal className="card accent-blue mx-auto flex max-w-xl flex-col items-center gap-3 p-6 text-center">
         <p className="text-ink-soft">{t.gallery.empty}</p>
         <a
           href={siteData.instagram.url}
@@ -48,32 +46,29 @@ export function GalleryGrid({
 
   return (
     <>
-      <div className={`flex items-start ${gapClass}`}>
-        {masonry.map((column, columnIndex) => (
-          <div key={columnIndex} className={`flex min-w-0 flex-1 flex-col ${gapClass}`}>
-            {column.map(({ photo, index }) => (
-              <Reveal key={photo.src} delay={(index % 3) * 0.06}>
-                <button
-                  type="button"
-                  onClick={() => gallery.open(index)}
-                  aria-label={t.a11y.enlarge(index + 1)}
-                  className={`group ${SHAPES[index % SHAPES.length]} block w-full cursor-zoom-in overflow-hidden bg-mint-soft shadow-soft`}
-                >
-                  <Image
-                    src={photo.src}
-                    alt={t.gallery.alt(index + 1)}
-                    width={photo.width}
-                    height={photo.height}
-                    sizes={sizes}
-                    loading="lazy"
-                    className="h-auto w-full transition-transform duration-500 ease-gentle group-hover:scale-[1.03]"
-                  />
-                </button>
-              </Reveal>
-            ))}
-          </div>
+      <ul className={`grid ${gridClass}`}>
+        {gallery.visible.map((photo, index) => (
+          <li key={photo.src}>
+            <Reveal delay={(index % 3) * 0.06}>
+              <button
+                type="button"
+                onClick={() => gallery.open(index)}
+                aria-label={t.a11y.enlarge(index + 1)}
+                className="group relative block aspect-square w-full cursor-zoom-in overflow-hidden rounded-[1.25rem] bg-paper shadow-soft transition-[transform,box-shadow] duration-300 ease-gentle hover:-translate-y-1 hover:shadow-lift lg:aspect-[5/4]"
+              >
+                <Image
+                  src={photo.src}
+                  alt={t.gallery.alt(index + 1)}
+                  fill
+                  sizes={sizes}
+                  loading="lazy"
+                  className="object-cover transition-transform duration-500 ease-gentle group-hover:scale-[1.04]"
+                />
+              </button>
+            </Reveal>
+          </li>
         ))}
-      </div>
+      </ul>
 
       {gallery.hasMore && (
         <div className="mt-5 flex justify-center">

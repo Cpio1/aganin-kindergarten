@@ -1,24 +1,30 @@
 import Image from "next/image";
 import type { SiteLogo } from "@/lib/media";
-import { Star } from "./Art";
+
+const WORDMARK_TILES = [
+  { letter: "K", color: "bg-green", tilt: "-rotate-6" },
+  { letter: "I", color: "bg-yellow", tilt: "rotate-3" },
+  { letter: "D", color: "bg-blue", tilt: "-rotate-3" },
+  { letter: "S", color: "bg-pink", tilt: "rotate-6" },
+];
 
 /**
  * Настоящий логотип с сохранёнными пропорциями. Пока файла нет, показывается
- * текстовое название: это типографика, а не выдуманный логотип.
+ * временное название текстом в той же цветовой логике.
  */
 export function Logo({
   logo,
   heightClass = "h-10",
   sizes = "160px",
   priority = false,
-  light = false,
+  large = false,
 }: {
   logo: SiteLogo | null;
   heightClass?: string;
   sizes?: string;
   priority?: boolean;
-  /** Светлый текст названия для тёмного фона. */
-  light?: boolean;
+  /** Крупное текстовое название для первого экрана. */
+  large?: boolean;
 }) {
   if (logo) {
     return (
@@ -37,12 +43,23 @@ export function Logo({
 
   return (
     <span
-      className={`font-display inline-flex items-center gap-1.5 text-lg leading-none font-bold tracking-tight whitespace-nowrap ${
-        light ? "text-milk" : "text-ink"
+      role="img"
+      aria-label="AGANIN KIDS"
+      className={`font-display inline-flex items-center font-extrabold whitespace-nowrap text-ink ${
+        large ? "gap-2.5 text-[2rem] leading-none" : "gap-1.5 text-[1.1rem] leading-none"
       }`}
     >
-      <Star className="size-5 shrink-0 text-sun-deep" />
-      AGANIN <span className={light ? "text-mint" : "rounded-md bg-mint px-1 py-0.5"}>KIDS</span>
+      <span className="brand-title tracking-tight">AGANIN</span>
+      <span className="inline-flex gap-[0.1em]">
+        {WORDMARK_TILES.map(({ letter, color, tilt }) => (
+          <span
+            key={letter}
+            className={`inline-flex size-[1.2em] items-center justify-center rounded-[0.28em] text-[0.8em] ${color} ${tilt}`}
+          >
+            {letter}
+          </span>
+        ))}
+      </span>
     </span>
   );
 }

@@ -18,7 +18,7 @@ export function MobileLayout({ media }: { media: SiteMedia }) {
     <>
       <a
         href="#main"
-        className="btn btn-sun fixed top-2 left-2 z-50 -translate-y-20 focus-visible:translate-y-0"
+        className="btn btn-mint fixed top-2 left-2 z-50 -translate-y-20 focus-visible:translate-y-0"
       >
         {t.a11y.skip}
       </a>
@@ -39,7 +39,7 @@ export function MobileLayout({ media }: { media: SiteMedia }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${t.contacts.whatsapp} (${t.a11y.newTab})`}
-        className="fixed right-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-30 flex size-13 items-center justify-center rounded-full bg-mint text-ink shadow-lift ring-3 ring-milk transition-transform active:scale-95"
+        className="fixed right-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-30 flex size-13 items-center justify-center rounded-full bg-green text-ink shadow-lift ring-3 ring-white transition-transform active:scale-95"
       >
         <WhatsAppIcon className="size-7" />
       </a>

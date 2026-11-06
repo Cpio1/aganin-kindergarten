@@ -22,7 +22,7 @@ export function AboutMedia({
   className?: string;
 }) {
   const { t } = useLocale();
-  const frame = `relative w-full overflow-hidden bg-mint-soft shadow-lift ${className}`;
+  const frame = `relative w-full overflow-hidden bg-mint-soft ${className}`;
 
   if (media?.kind === "video") {
     return (

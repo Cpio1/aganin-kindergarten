@@ -15,12 +15,12 @@ export function MobileGallery({ media }: { media: SiteMedia }) {
   const { t } = useLocale();
 
   return (
-    <section id="gallery" className="bg-peach-soft/60 py-6">
+    <section id="gallery" className="py-6">
       <div className="mx-auto max-w-2xl px-4">
         <Reveal>
           <SectionHeading kicker={t.gallery.kicker} title={t.gallery.title} className="mb-3.5" />
         </Reveal>
-        <GalleryGrid images={media.gallery} columns={2} gapClass="gap-2" sizes="(min-width: 672px) 320px, 50vw" />
+        <GalleryGrid images={media.gallery} gridClass="grid-cols-2 gap-2 sm:grid-cols-3" sizes="(min-width: 672px) 210px, (min-width: 640px) 33vw, 50vw" />
       </div>
     </section>
   );
@@ -33,7 +33,7 @@ export function MobileDocuments() {
   return (
     <section id="documents" className="mx-auto max-w-2xl px-4 py-6">
       <Reveal>
-        <div className="shape-a relative overflow-hidden bg-sun p-4 shadow-soft">
+        <div className="card-soft accent-yellow relative overflow-hidden !rounded-3xl p-4">
           <DocumentsArt className="absolute -top-1 -right-2 w-20" />
           <p className="font-display text-sm font-semibold">{documents.kicker}</p>
           <h2 className="pr-16 text-xl leading-tight font-bold">{documents.title}</h2>
@@ -75,10 +75,10 @@ export function MobileContacts() {
   return (
     <section id="contacts" className="mx-auto max-w-2xl px-4 pb-5">
       <Reveal>
-        <SectionHeading kicker={contacts.kicker} title={contacts.title} squiggleClass="text-mint-deep" />
+        <SectionHeading kicker={contacts.kicker} title={contacts.title} />
       </Reveal>
       <Reveal className="mt-3">
-        <address className="shape-b bg-mint-soft p-4 not-italic">
+        <address className="card accent-mint p-4 not-italic">
           <p className="font-display font-bold">{contacts.legalName}</p>
           <ul className="mt-2 space-y-1.5 text-[0.92rem]">
             <li className="flex items-start gap-2">
@@ -114,7 +114,7 @@ export function MobileContacts() {
                 <a
                   href={`tel:${phone.e164}`}
                   aria-label={`${contacts.call}: ${phone.display}`}
-                  className="btn btn-milk w-full"
+                  className="btn btn-white w-full"
                 >
                   <Phone className="size-4.5 shrink-0" aria-hidden="true" />
                   <span className="whitespace-nowrap">{phone.display}</span>
@@ -126,7 +126,7 @@ export function MobileContacts() {
                 href={whatsappUrl(t.common.whatsappMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-mint w-full"
+                className="btn btn-green w-full"
               >
                 <WhatsAppIcon className="size-5" />
                 {contacts.whatsapp}
@@ -136,7 +136,7 @@ export function MobileContacts() {
         </address>
       </Reveal>
       <Reveal className="mt-3">
-        <MapCard className="shape-d h-72 sm:h-96" />
+        <MapCard className="h-72 sm:h-96" />
       </Reveal>
     </section>
   );
