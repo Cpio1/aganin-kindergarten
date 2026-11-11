@@ -20,10 +20,10 @@ export const siteData = {
   },
 
   /**
-   * Ссылка на папку с документами, например на Google Drive.
-   * Пока null, вместо кнопки просмотра показывается пояснение и кнопка WhatsApp.
+   * Ссылка на папку с документами (Облако Mail.ru).
+   * Если поставить null, вместо кнопки просмотра покажется пояснение и кнопка WhatsApp.
    */
-  documentsUrl: null as string | null,
+  documentsUrl: "https://cloud.mail.ru/home/Документы%20(aganin%20kids)" as string | null,
 
   /** Карточка «Aganin kids» в 2ГИС: сверены телефон, Instagram, часы и номер дома. */
   twoGis: {
