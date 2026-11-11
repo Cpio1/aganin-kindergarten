@@ -123,6 +123,7 @@ export function DesktopGroups() {
                     </div>
                     <div className="px-1.5 pt-2.5 pb-1.5 text-center">
                       <h3 className="text-lg leading-tight font-bold">{name}</h3>
+                      <p className="mt-0.5 text-[0.85rem] text-ink/70">{group.age[locale]}</p>
                       <a
                         href={whatsappUrl(t.groups.askMessage(name))}
                         target="_blank"

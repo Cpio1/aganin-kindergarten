@@ -96,6 +96,7 @@ export function MobileGroups() {
                       <GroupCharacter art={group.art} className="w-[70%]" />
                     </span>
                     <span className="font-display mt-1.5 block text-[0.95rem] leading-tight font-bold">{name}</span>
+                    <span className="mt-0.5 block text-[0.75rem] leading-tight text-ink/70">{group.age[locale]}</span>
                   </a>
                 </Reveal>
               </li>
